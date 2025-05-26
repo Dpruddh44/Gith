@@ -1,0 +1,45 @@
+set ns [new Simulator]
+
+set tracefile [open encrypt_trace.tr w]
+$ns trace-all $tracefile
+set namfile [open encrypt.nam w]
+$ns namtrace-all $namfile
+
+set n0 [$ns node]
+set n1 [$ns node]
+
+$ns duplex-link $n0 $n1 2Mb 10ms DropTail
+$ns queue-limit $n0 $n1 10
+
+proc encrypt {data} {
+    set key 5
+    return [expr $data ^ $key]
+}
+
+proc decrypt {data} {
+    set key 5
+    return [expr $data ^ $key]
+}
+
+proc sendData {src dst data} {
+    set encrypted [encrypt $data]
+    puts "Encrypted Data: $encrypted"
+    $src set data_ $encrypted
+    $dst set data_ [decrypt $encrypted]
+    puts "Decrypted Data at Receiver: [$dst set data_]"
+}
+
+$ns at 0.5 "sendData $n0 $n1 1234"
+$ns at 1.0 "sendData $n0 $n1 5678"
+
+proc finish {} {
+    global ns tracefile namfile
+    $ns flush-trace
+    close $tracefile
+    close $namfile
+    exec nam encrypt.nam &
+    exit 0
+}
+
+$ns at 1.5 "finish"
+$ns run
