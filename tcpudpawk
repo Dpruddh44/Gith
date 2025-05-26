@@ -1,0 +1,17 @@
+# File: p2.awk
+BEGIN {
+    tcp = 0
+    cbr = 0
+}
+
+{
+    if ($1 == "-" && $5 == "tcp")
+        tcp++
+    if ($1 == "-" && $5 == "cbr")
+        cbr++
+}
+
+END {
+    printf("\nNo. of TCP packets sent = %d\n", tcp)
+    printf("No. of CBR packets sent = %d\n", cbr)
+}
