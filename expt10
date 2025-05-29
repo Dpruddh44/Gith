@@ -1,0 +1,76 @@
+#include <WiFi.h>  // Include WiFi library
+
+const char* ssid     = "Your_SSID";         // Replace with your Wi-Fi SSID
+const char* password = "Your_PASSWORD";     // Replace with your Wi-Fi password
+
+WiFiServer server(80);  // Create a web server object that listens on port 80
+
+void setup() {
+  Serial.begin(115200);     // Start Serial Monitor
+  pinMode(2, OUTPUT);       // GPIO 2 is used for LED
+
+  delay(10);
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+
+  WiFi.begin(ssid, password);  // Connect to Wi-Fi
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("");
+  Serial.println("WiFi connected.");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());  // Print ESP32's IP address
+
+  server.begin();  // Start the server
+}
+
+void loop(){
+  WiFiClient client = server.available();  // Listen for incoming clients
+
+  if (client) {
+    Serial.println("New Client.");
+    String currentLine = "";
+
+    while (client.connected()) {
+      if (client.available()) {
+        char c = client.read();
+        Serial.write(c);
+        
+        if (c == '\n') {
+          if (currentLine.length() == 0) {
+            // Send a response header
+            client.println("HTTP/1.1 200 OK");
+            client.println("Content-type:text/html");
+            client.println();
+
+            // Send HTML content
+            client.print("Click <a href=\"/H\">here</a> to turn the LED ON.<br>");
+            client.print("Click <a href=\"/L\">here</a> to turn the LED OFF.<br>");
+
+            client.println();
+            break;
+          } else {
+            currentLine = "";
+          }
+        } else if (c != '\r') {
+          currentLine += c;
+        }
+
+        // Handle GET request
+        if (currentLine.endsWith("GET /H")) {
+          digitalWrite(2, HIGH);  // Turn LED ON
+        }
+        if (currentLine.endsWith("GET /L")) {
+          digitalWrite(2, LOW);   // Turn LED OFF
+        }
+      }
+    }
+    client.stop();
+    Serial.println("Client Disconnected.");
+  }
+}
