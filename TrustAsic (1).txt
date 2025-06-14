@@ -1,0 +1,191 @@
+TRUST-ASIC
+
+B L O C K C H A I N S E C U R E D F I R M WA R E A N D A I M O D E L VA L I D AT I O N I N
+VLSI SOC
+
+2025
+
+The Problem
+Edge AI is transforming industries:
+automotive, and industrial automation.
+
+smart
+
+cities,
+
+• Single points of failure
+
+Devices rely on frequent firmware and AI model updates,
+which, if compromised, can pose serious safety, privacy,
+and security risks.
+Current
+update
+infrastructures:
+
+systems
+
+rely
+
+on
+
+These systems face several limitations:
+
+centralized
+
+Cloud-based OTA (Over-The-Air) update platforms
+PKI-based certificate authorities
+
+• Expensive to operate and hard to scale across millions
+of devices
+• Limited transparency, traceability, and no native
+rollback support
+• Modern SoCs already feature cryptographic engines,
+secure enclaves, and secure boot—but these are not
+fully leveraged for decentralized trust.
+
+We propose a decentralized update validation system that moves trust
+from the cloud into the SoC itself.
+Each AI-enabled SoC integrates a lightweight blockchain client (e.g.,
+NanoChain or Tendermint-Lite) along with its secure enclave and
+cryptographic accelerators.
+• Manufacturer publishes firmware/model hashes on a permissioned
+blockchain ledger.
+• Devices fetch updates and verify them locally using on-chip SHA/ECC
+engines.
+• Updates are installed only after consensus is reached across validator
+nodes.
+• This eliminates dependence on a single server or CA.
+• Provides immutable audit trails, secure rollbacks, and self-healing
+peer-to-peer recovery mechanisms.
+
+Our Solution?
+A BlockchainSecured, SiliconEmbedded Trust
+Fabric
+
+Technical
+Novelty
+What sets our system apart:
+• Silicon-Level Consensus:
+• Unlike edge/cloud blockchains, our design embeds consensus logic into SoC firmware and secure hardware.
+• Resource-Aware Protocols:
+Custom blockchain protocols optimized for low-power, area-constrained silicon
+• Self-Healing Peer Network:
+When nodes are compromised or go offline, neighboring devices facilitate update propagation and rollback
+• MVP Demonstration Ready:
+A functional private blockchain testnet runs on Raspberry Pis, simulating SoC behavior
+• Demos include: secure model updates, rejection of malicious binaries, and full rollback
+
+Business Model Revenue Streams
+We offer a subscription-based security service for OEMs and
+IoT solution providers.
+• Per-device subscription:
+• $1–$3 USD per device, per year
+• Provides access to the blockchain network, consensus
+engine, and recovery services
+• This model is ideal for scaling across millions of devices in
+distributed environments such as:
+• Smart meters, autonomous drones, industrial sensors,
+and more
+
+Customer Benefits:
+• No need to maintain secure cloud
+infrastructure
+• Verifiable, tamper-proof update
+trails
+• Seamless compliance with security
+regulations
+• Lower total cost of ownership (TCO)
+than traditional OTA security
+models
+
+Business Model Value Proposition
+Integration &
+Licensing
+
+• Licensing of cryptographic IP cores, secure boot
+firmware, and lightweight blockchain clients
+• Silicon IP integration support for SoC vendors
+• SDKs and dev kits for OEMs to onboard new devices
+Managed Security Services:
+• Blockchain dashboard for firmware status, incident
+response, and fleet health
+• Automated rollback and forensic reporting
+• Full-lifecycle device integrity monitoring
+
+Certification &
+Auditing
+
+• “Blockchain
+certification
+
+Secure
+
+IoT”
+
+• Revenue
+from
+periodic
+audits, compliance reports,
+and
+vulnerability
+assessments
+• Trust-mark branding for
+consumer-facing
+secure
+products
+
+Market Fit & Impact
+Perfect Market Fit
+Tailored for AI-centric embedded markets:
+Smart grids
+Connected vehicles
+Edge robotics
+Defense and industrial control systems
+
+Why It
+Matters
+Protects mission-critical AI updates from
+tampering and cyberattacks
+Enables true decentralized trust at the
+silicon level
+Minimizes operational costs by reducing
+cloud reliance
+Future-proof: scalable to billions of devices
+across industries
+
+Impact
+Establishes a new standard in
+embedded system security
+Enables safer AI deployment in
+untrusted, distributed environments
+Aligns with industry trends toward
+zero-trust architectures and sovereign
+device security
+
+What’s next for Trust-ASIC?
+Prototype Completion on FPGA
+Deploy secure boot, hash verification,
+and blockchain validation modules on
+FPGA.
+Demonstrate real-time update
+authentication using simulated firmware
+and AI model flows.
+
+Lightweight Blockchain Integration
+Optimize custom blockchain
+protocol for embedded SoCs with
+minimal memory and power.
+Enable hardware-accelerated
+consensus and on-chip validation
+using SHA/ECC engines.
+
+Pilot Testing & Validation
+Simulate IoT edge
+environments (smart meters,
+drones) using Raspberry Pi
+nodes.
+Measure update latency,
+recovery time, and resilience to
+tampered updates.
+
+
